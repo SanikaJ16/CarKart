@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CarResellerWebsite</title>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+      <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js"></script>
+      <!-- font awesome cdn link  -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+      <!-- custom css file link  -->
+      <!-- <link rel="stylesheet" href="style.css"> -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='swiper-bundle.min.css') }}">
+
+    <!-- <script>
+      var buy = document.getElementById("buy-car")
+      var sell = document.getElementById("sell-car")
+      var predict = document.getElementById("pre-car")
+      buy.style.display = "none"
+      predict.style.display = "none"
+      
+    </script> -->
+   </head>
+
+   <body>
+
+      <!-- NAVBAR STARTS -->
+      <header class="header">
+        <section class="flex">
+            <!-- Logo and Website Name -->
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logof.png') }}" alt="CarKart Logo" height="60px">
+                <a href="#home" class="carkart">CarKart</a>
+            </div>
+            <!-- Navigation Items -->
+            <nav class="navbar">
+                <a href="http://localhost/carkart/buy.php" class="navbtn buy navbar-button" id="buy" onclick="toggle(0)">Buy Car</a>
+                <a href="#sell" class="navbtn sell navbar-button active" id="sell" onclick="toggle(1)">Sell Car</a>
+                <a href="{{ url_for('predict') }}" class="navbtn about navbar-button" id="pri" onclick="toggle(2)">Car Price Predictor</a>
+            </nav>
+        </section>
+    </header>
+    
+      <!-- NAVBAR ENDS -->
+
+      <!-- HERO STARTS -->
+      <div class="hero">
+         <img src="{{ url_for('static', filename='images/board.jpg') }}" alt="bg" class="backimg">
+         <img src="{{ url_for('static', filename='images/car1.png') }}" alt="bg" class="car1">
+         <span class="herotxt">
+            Unlock Your Car's True Value
+         </span>
+
+         <span class="heroquote">
+            Our website is your one-stop destination for hassle-free car resale, where we help you unlock the true value of
+            your vehicle.
+         </span>
+      </div>
+      
+
+      <div class="page" id="sell-car">
+        <!-- STARTS -->
+      <!-- precictor STARTS -->
+      <div class="pre">
+        <div class="predicthead">
+          <div class="preh">
+            Fill Details of your car here:
+          </div>
+          <div class="prei">
+            Unlock Value in Every Mile by filling the details below :
+          </div>
+      </div>
+      <div class="predict">
+        <div class="wrapper-left">
+          <div class="wrapper">
+          <form action="#">
+            <div class="input-box">
+              Company name:
+              <input type="text" placeholder="Enter the Company name of vehicle" required>
+            </div>
+            <div class="input-box">
+              Car model:
+              <input type="text" placeholder="Enter the model of vehicle" required>
+            </div>
+            <div class="input-box">
+              Year of Purchase:
+              <input type="number" placeholder="Enter the year of purchase of vehicle" required>
+            </div>
+            <div class="input-box">
+              Fuel type:
+              <input list="Fueltype" id="Fueltype" name="Fueltype" placeholder="Enter the Fuel Type of vehicle"/>
+              <datalist id="Fueltype">
+                <option value="Petrol"></option>
+                <option value="Diesel"></option>
+                <option value="CNG"></option>
+                <option value="Electric"></option>
+              </datalist>
+            </div>
+            <!-- <select class="form-control" id="fuel_type" name="fuel_type" required="1">
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="CNG">CNG</option>
+              <option value="Electric">Electric</option>
+            </select> -->
+            <div class="input-box">
+              Kilometer driven:
+              <input type="number" placeholder="Enter the number of kilometers driven of vehicle" required>
+            </div>
+            <div class="input-box">
+              Owner's name:
+              <input type="text" placeholder="Enter the model of vehicle" required>
+            </div>
+            <div class="input-box">
+              Owner's Contact Number:
+              <input type="text" placeholder="Enter the model of vehicle" required>
+            </div>
+            <div class="input-box">
+              Car Image:
+              <input type="file" placeholder="Enter the model of vehicle" required>
+            </div>
+            <div id="bunwrap">
+              <div class="button" id="bun">
+                <input type="Submit" value="Submit car info">
+              </div>
+            </div>
+            
+          </form>
+          </div>
+        </div>
+        <div class="wrapper-right">
+          <img src="{{ url_for('static', filename='images/img2.png') }}" class="predictimg" alt="">
+        </div>
+      </div>
+    </div>
+    
+      <!-- 3 stp -->
+      <hr>
+        <div class="stp">
+          <div class="stptxtwrapper">
+            <div class="stptxtheader">
+              Sell in 3 easy steps
+            </div>
+            <div class="stptxt">
+               <div class="stptxtno">1.</div>
+               <div class="stptxtwrd">
+                  <div class="stptxthead ">Get price online</div>
+                  <div class="stptxtdetail ">Answer some questions about your car to help us understand its condition</div>
+               </div>
+            </div>
+            <div class="stptxt">
+               <div class="stptxtno">2.</div>
+               <div class="stptxtwrd">
+                  <div class="stptxthead ">Car inspection</div>
+                  <div class="stptxtdetail ">Our car expert will personally inspect your car, and then we'll present our final offer</div>
+               </div>
+            </div>
+            <div class="stptxt">
+               <div class="stptxtno">3.</div>
+               <div class="stptxtwrd">
+                  <div class="stptxthead ">Car pick up & payment</div>
+                  <div class="stptxtdetail ">We'll initiate a direct bank transfer prior to car pickup</div>
+               </div>
+            </div>
+         </div>
+         <div class="stpimgwrapper">
+            <img src="{{ url_for('static', filename='images/img2.png') }}" class="stpimg" alt="">
+         </div>
+      </div>
+
+
+<!-- review sectioin starts -->
+
+<div class="container">
+   <h2>10k+ Happy Drives stories</h2>
+   <ul class="cards">
+     <li class="card">
+       <div>
+         
+         <div class="card-content">
+           <p>I had an incredible experience purchasing my dream car from this dealership. The website was user-friendly, making it easy to browse and compare vehicles. The customer support was exceptional, and I found the perfect car quickly. Highly recommended!</p>
+         </div>
+       </div>
+     </li>
+
+     <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website's search filters helped me narrow down my choices, and I eventually found the ideal car for my needs. The only reason I'm not giving it 5 stars is because the financing information could be more detailed.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>Outstanding service! The website made it simple to explore various car options, and I received prompt responses to my inquiries. The buying process was smooth, and I'm thrilled with my new car. Thanks a lot!</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website was decent, but it could benefit from more detailed vehicle descriptions and additional images. Overall, the dealership had a good selection, and I eventually found a suitable car.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>I had an excellent experience with this dealership's website. It was intuitive and informative. The staff was helpful and knowledgeable, which made the entire car-buying process stress-free. Highly recommended!</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website was easy to navigate, and I appreciated the virtual tours of the cars. My only suggestion would be to include more customer reviews to provide additional insights.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website was a breeze to use. I was able to find the exact car I wanted, schedule a test drive, and complete the purchase, all from the comfort of my home. The staff was also incredibly accommodating. A top-notch experience!</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>I found the website helpful in my search for a new vehicle. It would be great if you could add a feature for comparing multiple cars side by side. Nevertheless, I'm satisfied with my purchase.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website made my car search incredibly efficient. The inventory was well-organized, and the filter options were fantastic. I found my dream car and had a seamless buying experience. Thank you!</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website was easy to use, and I found a car that met my criteria. The financing options were clear, and the customer service was excellent. The only improvement I'd suggest is to have more vehicle history reports available for used cars.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>I had an exceptional experience using this website to purchase my new car. The layout was intuitive, and the information provided for each vehicle was comprehensive. The chat support was also very helpful throughout the process.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>The website's search functionality was great, and I appreciated the wide range of cars available. My only suggestion would be to include more detailed vehicle history reports for used cars to boost customer confidence.</p>
+        </div>
+      </div>
+    </li>
+
+    <li class="card">
+      <div>
+        
+        <div class="card-content">
+          <p>I can't express how pleased I am with my purchase through this dealership's website. It was hassle-free, and the customer service was top-notch. I'd recommend this site to anyone looking for a new car.</p>
+        </div>
+      </div>
+    </li>
+    </ul>
+    </div>
+   
+   <div class="buysell">
+      <div class="buysellcontent">
+         <div>
+            <div class="buysellhead">
+              Selling a car? We’re buying!
+            </div>
+            <div class="buysellinfo">
+              We provide a diverse range of quality vehicles for purchase right here.
+            </div>
+         </div>
+         <img src="{{ url_for('static', filename='images/car2.png') }}" class="buysellimg" alt="car">
+      </div>
+   </div>
+<!-- ENDS -->
+      </div>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+      <!-- /---------------------------------------------------------------------------------------------------------------------------------------- -->
+   <!-- Footer section -->
+   <footer>
+      <div class="footer-box" id="sign-in">
+          <div class="footer-link footer-about">
+              <p>At CarKart, we're your trusted partner in the world of automotive. We're passionate about providing an exceptional experience for buyers and sellers. With a diverse selection of quality vehicles and a streamlined selling process, we're here to make car transactions effortless. Our expert team ensures you get the best deal. Join our vibrant car enthusiast community at CarKart and embark on a journey filled with endless possibilities. Ready to hit the road?</p>
+          </div>
+          <div class="footer-link">
+              <h3>Buying And Selling</h3>
+              <a href="#">Find a car</a>
+              <a href="#">Listing by city</a>
+              <a href="#">Car Reviews and ratings</a>
+              <a href="#">Certified Pre-owned</a>
+              <a href="#">Fraud Awareness</a>
+              <a href="#">Sell your Car</a>
+              <a href="#">Check Car Price</a>
+          </div>
+          <div class="footer-link">
+              <h3>Other Useful links</h3>
+              <a href="#">Terms & Conditions</a>
+              <a href="#">My Privacy Choice</a>
+              <a href="#">Accessibility Statement</a>
+              <a href="#">Ad Choices</a>
+              <a href="#">Feedback</a>
+              <a href="#">Jobs Inquiry</a>
+              <a href="#">FAQ's</a>
+          </div>
+          <div class="footer-link">
+              <h3>Contact Us</h3>
+              <a href="#">Facebook</a>
+              <a href="#">Twitter</a>
+              <a href="#">Instagram</a>
+              <a href="#">Whatsapp</a>
+              <a href="#">LinkedIn</a>
+              <a href="#">Youtube</a>
+              <a href="#">Telegram</a>
+          </div>
+      </div>
+      <p class="end">COPYRIGHT &copy; 2023 Miniproject Grp</p>
+  </footer>
+   </body>
+
+   
+<script>
+    // display function starts 
+      firebaseConfig = {
+      "databaseURL": "https://carkart-73d41-default-rtdb.firebaseio.com/",
+      "apiKey": "AIzaSyBH-O-gbASPqRozfQJk3NZJW4t506xUrZo",
+      "authDomain": "carkart-73d41.firebaseapp.com",
+      "projectId": "carkart-73d41",
+      "storageBucket": "carkart-73d41.appspot.com",
+      "messagingSenderId": "564230636572",
+      "appId": "1:564230636572:web:d7a998d78d3fa25454cbd9",
+      "measurementId": "G-ZG7PCXGNK8"
+    };
+    firebase.initializeApp(firebaseConfig);
+  
+    db = firebase.database()
+    // function display(name){
+    //   var buy = document.getElementById("buy-car")
+    //   var sell = document.getElementById("sell-car")
+    //   buy.style.display = "none"
+    //   sell.style.display = "none";
+    //   // predict.style.display = "none"
+    //   // console.log(name)
+    //   var result = db.child(car).order_by_child(company).equal_to(name).get()
+    //   // document.getElementById(result).innerHTML = result;
+  
+    // }
+  
+  
+  // toggle function starts
+    const navbarButtons = document.querySelectorAll(".navbar-button");
+    var buy = document.getElementById("buy-car")
+    var sell = document.getElementById("sell-car")
+    var predict = document.getElementById("pre-car")
+    var buybtn = document.getElementById("buy")
+    var sellbtn = document.getElementById("sell")
+    var prebtn = document.getElementById("pri")
+    // buy.style.display = "none"
+    // sell.style.display = "block";
+    // predict.style.display = "none"
+  
+    function toggle(n) {
+      if (n == 0) {
+        buy.style.display = 'block';
+        sell.style.display = 'none';
+        predict.style.display = 'none';
+        buybtn.classList.add("active")
+        sellbtn.classList.remove("active")
+        prebtn.classList.remove("active")
+        console.log("clicked buy");
+      }
+      if (n == 1) {
+        sell.style.display = "block";
+        buy.style.display = "none";
+        predict.style.display = "none";
+        sellbtn.classList.add("active")
+        buybtn.classList.remove("active")
+        prebtn.classList.remove("active")
+        console.log("clicked sell");
+      }
+      if (n == 2) {
+        predict.style.display = "block";
+        buy.style.display = "none";
+        sell.style.display = "none";
+        prebtn.classList.add("active")
+        buybtn.classList.remove("active")
+        sellbtn.classList.remove("active")
+        
+        // window.location.href = 'prediction.html';
+      }
+    }
+  
+  
+    function load_car_models(company_id, car_model_id) {
+      var company = document.getElementById(company_id);
+      var car_model = document.getElementById(car_model_id);
+      console.log(company.value);
+      car_model.value = "";
+      car_model.innerHTML = "";
+      {% for company in companies %}
+      if (company.value == "{{ company }}") {
+        {% for model in car_models %}
+        {% if company in model %}
+  
+        var newOption = document.createElement("option");
+        newOption.value = "{{ model }}";
+        newOption.innerHTML = "{{ model }}";
+        car_model.options.add(newOption);
+        {% endif %}
+        {% endfor %}
+      }
+      {% endfor %}
+    }
+  
+    // -------------------------------------------------------------------------------------------------------------------------
+    function form_handler(event) {
+      event.preventDefault(); // Don't submit the form normally
+    }
+  
+    function send_data() {
+      document.querySelector('form').addEventListener("submit", form_handler);
+  
+      var fd = new FormData(document.querySelector('form'));
+      var xhr = new XMLHttpRequest({ mozSystem: true });
+      xhr.open('POST', '/predict', true);
+      document.getElementById('wrapper-right').innerHTML = "Wait! Predicting Price.....";
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+          document.getElementById('prediction').innerHTML = "Prediction: Rs. " + xhr.responseText;
+        }
+      };
+      xhr.onload = function () { };
+      xhr.send(fd);
+    }
+  
+    // function reloadwala(event) {
+    //   // const form = document.getElementById('myForm');
+    //   // form.addEventListener('submit', function(event) {
+    //   // Prevent the default form submission behavior
+    //   event.preventDefault();
+    // }
+  
+  
+    // search wala part hai ye 
+    // const firebaseConfig = {
+    //   "databaseURL": "https://carkart-73d41-default-rtdb.firebaseio.com/",
+    //   "apiKey": "AIzaSyBH-O-gbASPqRozfQJk3NZJW4t506xUrZo",
+    //   "authDomain": "carkart-73d41.firebaseapp.com",
+    //   "projectId": "carkart-73d41",
+    //   "storageBucket": "carkart-73d41.appspot.com",
+    //   "messagingSenderId": "564230636572",
+    //   "appId": "1:564230636572:web:d7a998d78d3fa25454cbd9",
+    //   "measurementId": "G-ZG7PCXGNK8"
+    // };
+  
+    // firebase.initializeApp(firebaseConfig);
+  
+  
+</script>
+   <script src="script.js"></script>
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+crossorigin="anonymous"></script>
+</html>

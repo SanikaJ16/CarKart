@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style for the navigation bar buttons */
+        .navbar-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Style for the active button */
+        .active {
+            background-color: #007bff;
+        }
+
+        /* Style for the divs */
+        .page {
+            display: none; /* Hide all divs by default */
+        }
+
+        /* Display the default page */
+        #buy-car {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <!-- Navigation bar buttons with data attributes for div selection -->
+    <div class="navbar-button active" data-target="buy-car">Buy Car</div>
+    <div class="navbar-button" data-target="sell-car">Sell Car</div>
+</div>
+
+<div class="page" id="buy-car">
+    <!-- Content for Buy Car page -->
+    <h1>Buy Car</h1>
+    <!-- Add your content here -->
+</div>
+
+<div class="page" id="sell-car">
+    <!-- Content for Sell Car page -->
+    <h1>Sell Car</h1>
+    <!-- Add your content here -->
+</div>
+
+<script>
+    // JavaScript to toggle the visibility of divs
+    const navbarButtons = document.querySelectorAll(".navbar-button");
+    const pages = document.querySelectorAll(".page");
+
+    navbarButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Remove the "active" class from all buttons
+            navbarButtons.forEach(btn => btn.classList.remove("active"));
+            // Add the "active" class to the clicked button
+            button.classList.add("active");
+
+            // Hide all divs
+            pages.forEach(page => page.style.display = "none");
+
+            // Show the selected div based on the data-target attribute
+            const targetDivId = button.getAttribute("data-target");
+            const targetDiv = document.getElementById(targetDivId);
+            targetDiv.style.display = "block";
+        });
+    });
+</script>
+
+</body>
+</html>
